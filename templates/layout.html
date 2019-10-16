@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap" rel="stylesheet">      
+        <title>BooksProject - {% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #28334AFF">
+            <div class="container">
+                    <a class="navbar-brand text-warning" href="#">BooksProject</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">                        
+                        <span class="navbar-text text-white ml-auto">
+                            {% block navTxt %} {% endblock %}
+                            {% block navBtn %} {% endblock %}
+                        </span>
+                    </div>
+            </div>            
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                {% block body %} {% endblock %}
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <!-- <nav class="navbar fixed-bottom navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Fixed bottom</a>
+            </div>
+        </nav>     -->
+
+    </body>
+</html>

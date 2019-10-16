@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %} SignUp {% endblock %}
+
+{% block navTxt %} Already have an account? {% endblock %}
+{% block navBtn %} <button class='btn btn-sm btn-outline-warning ml-2' type='button'>Login</button> {% endblock %}
+
+{% block body %} 
+<div class="top-headings text-center mt-lg-3">
+    <h1 class="px-2">Read and submit book reviews.</h1>
+    <h2>Create a free account!</h2>
+</div>
+<div class="row mt-lg-4">
+    <div class="col-12 col-md-7">
+        <div class="card shadow rounded">  
+            <div class="card-header">
+                Registration form
+            </div>  
+            <div class="card-body px-4">
+                <form>
+                    <div class="form-group row">                         
+                        <input type="text" class="form-control" id="name" placeholder="Full Name" name="name">
+                    </div>
+                    <div class="form-group row">                         
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+                    </div>
+                    <div class="form-group row">                         
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+                    </div>
+                    <div class="form-group row">                         
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                    <div class="form-group row">
+                        <button type="submit" class="btn btn-warning">Sign up</button>
+                    </div>
+                </form>
+            </div>    
+        </div>
+    </div>
+
+    <div class="col-5 d-none d-md-block d-lg-block">
+        <img src="{{ url_for('static', filename='books_signup.jpg') }}" alt="Books Image" class="img-fluid">
+        <p class="text-right text-muted mt-2">
+            Photo by <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@brandi1?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Brandi Redd"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Brandi Redd</span></a>
+        </p>
+    </div>
+</div>
+{% endblock %}
