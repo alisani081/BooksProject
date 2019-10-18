@@ -10,10 +10,10 @@
     <h1 class="px-2 mb-0 pb-0">Book title </h1> <span class="text-muted">by author name</span>   
 </div>
 <div class="row mt-lg-4">
-    <div class="col-md-2 bg-white border shadow rounded">
-        <h3 class="text-center my-2">Book Details</h3>
+    <div class="col-md-2 bg-white border shadow rounded" style="max-height: 380px;">
+        <!-- <h3 class="text-center my-2">Book Details</h3> -->
         <div class="my-4">
-            <div class="border mr-3 bg-dark text-white" style="width:100%; height: 250px;">
+            <div class="border mr-3 bg-dark text-white" style="width:100%; height: 240px;">
                 Book Cover
             </div>   
             <div class="book_detail_list">
@@ -24,11 +24,18 @@
             </div>          
         </div>
     </div>  
-    <div class="col-md-6">
-        <h3>Good Reviews Data</h3>
+    <div class="col-md-7">
+        <h4 class="text-center mb-4 text-warning">What other people are saying about this book.</h4>
+        <div class="px-4">
+            <blockquote class="blockquote text-center border-bottom border-dark pb-2">
+                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <footer class="blockquote-footer">alisani081 on <small>15-Oct-2019</small></footer>
+            </blockquote>             
+        </div>
     </div>
-    <div class="col-md-4">
-        <h3>Book Review</h3>
+    <div class="col-md-3">
+        <h3 class="text-center">Book Review</h3>
         <div class="card shadow rounded">
             <dvi class="card-body">
                 <form class="px-2"> 
@@ -56,6 +63,17 @@
                     </div>
                 </form>
             </dvi>
+        </div>
+        <h4 class="text-center mt-4">Goodreads Review Data</h4>
+        <div class="card shadow rounded">
+            <div class="card-body">
+                <dl class="row text-primary">
+                    <dt class="col-sm-8">Average Rating</dt>
+                    <dd class="col-sm-4">4.50</dd>
+                    <dt class="col-sm-8">No. of Ratings</dt>
+                    <dd class="col-sm-4">23</dd>
+                </dl>                
+            </div>
         </div>
     </div>   
 </div>
