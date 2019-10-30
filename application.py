@@ -44,7 +44,7 @@ def index():
            }
         ).fetchone()
 
-        return render_template("index.html", user=user)
+    return render_template("index.html", user=user)
     
 
 @app.route("/signup", methods=["POST","GET"])
@@ -133,7 +133,7 @@ def login():
 
         flash(error, 'danger')
 
-    if session.get('user_id') is not None:
+    if 'user_id' in session:
        return redirect(url_for('index'))
 
     return render_template("login.html")
@@ -170,7 +170,7 @@ def search():
                 }
             ).fetchall()
 
-            if results is None:
+            if len(results) < 1:
                 flash(f"No result found for {searchword}, please try again!", 'danger')
                 return redirect(url_for("index"))
 

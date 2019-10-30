@@ -23,24 +23,19 @@
         </div>
     </div>     
 </div>
-<div class="row mt-3">
-    <div class="container">
-        
-    </div>
-</div>
 <div class="row mt-3 bg-white p-3">
     <div class="container">
         {% if results %}
         <h2 class="text-center pb-3">Search Result(s) for '{{ request.args.get('searchword') }}' </h2>
             {% for book in results %}                            
         <div class="media position-relative border-bottom border-dark pb-2 my-3">
-            <img class="border p-2 mr-3" src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" alt="Book Cover">             
+            <img class="border p-2 mr-3" src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" alt="Book Cover" class="img-responsive">             
             <div class="media-body">
                 <h5 class="mt-0 mb-0 pb-0">{{ book.title }}</h5>
                 <small class="text-muted">by {{ book.author }}</small>
-                <div style="max-width: 580px;">
+                <!-- <div style="max-width: 580px;">
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
+                </div> -->
                 <ul class="my-2">
                     <li>ISBN: <span class="text-monospace"> {{ book.isbn }} </span></li>
                     <li>Publication Year: <span class="text-monospace"> {{ book.year }} </span></li>
@@ -49,8 +44,11 @@
             </div>
         </div>   
             {% endfor %}        
-        {% else %} 
+        {% else %}
             <h2 class="text-center text-warning">We have more than 5000 books in our database</h2>
+            <div class="d-flex justify-content-center">
+                <img src="{{ url_for('static', filename='library_index.jpg') }}" alt="Books Image" class="img-fluid py-2 ">
+            </div>
         {% endif %}  
     </div>
 </div>
