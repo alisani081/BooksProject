@@ -12,13 +12,13 @@
     <body>
         <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #28334AFF">
             <div class="container">
-                    <a class="navbar-brand text-warning" href="#">BooksProject</a>
+                    <a class="navbar-brand text-warning" href="{{ url_for('index') }}">BooksProject</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarText">                        
                         <span class="navbar-text text-white ml-auto">
-                            {% block navTxt %} {% endblock %}
+                            {% block navTxt %} {% if user %} Hi, {{ user['username'] }} {% endif %} {% endblock %}
                             {% block navBtn %} {% endblock %}
                         </span>
                     </div>
@@ -29,19 +29,25 @@
         <main>            
             <div class="container">
                 <div class="row message">
-                    {% with messages = get_flashed_messages(with_categories=True) %}
-                    {% if messages %}
-                        {% for category, message in  messages %}
-                            <div class="alert alert-{{ category }}" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    {% endwith %}
+                    <div class="col-12 mt-2">
+                        {% block flashmessage %}
+                            {% with messages = get_flashed_messages(with_categories=True) %}
+                            {% if messages %}
+                                {% for category, message in  messages %}
+                                    <div class="alert alert-{{ category }}" role="alert">
+                                        {{message}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                        {% endblock %}
+                    </div>
                 </div>
                 {% block body %} {% endblock %} 
             </div>
         </main>
-
     </body>
 </html>

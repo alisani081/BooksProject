@@ -2,77 +2,88 @@
 
 {% block title %} Book Title {% endblock %}
 
-{% block navTxt %} Hi, Username {% endblock %}
-{% block navBtn %} <button class='btn btn-sm btn-outline-warning ml-2' type='button'>Sign out</button> {% endblock %}
+{% block navTxt %} {% if user %} Hi, {{ user['username'] }} {% endif %} {% endblock %}
+{% block navBtn %} <a href="{{ url_for('logout') }}" class='btn btn-sm btn-outline-warning ml-2 text-warning' type='button'>Sign out</a> {% endblock %}
 
 {% block body %} 
 <div class="top-headings text-center mt-lg-3">
-    <h1 class="px-2 mb-0 pb-0">Book title </h1> <span class="text-muted">by author name</span>   
+    <h1 class="px-2 mb-0 pb-0">{{ book.title }} </h1> <span class="text-muted">by {{ book.author }}</span>   
 </div>
 <div class="row mt-lg-4">
-    <div class="col-md-2 bg-white border shadow rounded" style="max-height: 380px;">
-        <!-- <h3 class="text-center my-2">Book Details</h3> -->
-        <div class="my-4">
-            <div class="border mr-3 bg-dark text-white" style="width:100%; height: 240px;">
-                Book Cover
-            </div>   
-            <div class="book_detail_list">
-                <small class="text-muted fav-font">Published in 2019</small>
-                <li class="text-monospace text-primary pt-2">ISBN: 1234567</li>  
-                <li class="fav-font text-primary">0 Reviews</li>   
-                <li class="fav-font text-primary">4.45 Average Rating</li>            
+    <div class="col-md-2 bg-white p-1" style="max-height: 420px;">
+        <div class="mb-2">
+            <img class="border" src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" alt="Book Cover">  
+            <div class="book_detail_list px-2">
+                <small class="text-muted fav-font">Published in {{ book.year }} </small>
+                <li class="text-monospace text-primary pt-2">ISBN: {{ book.isbn }} </li>  
+                <li class="text-monospace text-primary">{{ review_count }} Reviews</li>   
+                <li class="text-monospace text-primary">Average Rating: {{ avg_rating }}</li>            
             </div>          
         </div>
     </div>  
     <div class="col-md-7">
         <h4 class="text-center mb-4 text-warning">What other people are saying about this book.</h4>
-        <div class="px-4">
-            <blockquote class="blockquote text-center border-bottom border-dark pb-2">
-                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">alisani081 on <small>15-Oct-2019</small></footer>
-            </blockquote>             
+        <div class="bg-white border shadow rounded">
+            <div class="px-4">
+                {% if reviews %}
+                    {% for review in reviews %}
+                    <blockquote class="blockquote text-center border-bottom border-dark pb-2">
+                            {% for i in range(0,review.rating) %}
+                                <span>&#9733;</span>
+                            {% endfor %}
+                        </span>
+                        <p class="mb-0"> {{ review.comment }}</p>
+                        <footer class="blockquote-footer">{{ review.username }} on <small> {{ review.date }} </small></footer>
+                    </blockquote>             
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning my-2 text-center">No reviews yet...</div>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="col-md-3">
         <h3 class="text-center">Book Review</h3>
         <div class="card shadow rounded">
             <dvi class="card-body">
-                <form class="px-2"> 
+                {% if user_review %} 
+                <blockquote class="blockquote text-center border-bottom border-dark pb-2">
+                    <p>{{ user_review.comment }}</p>
+                    <footer class="blockquote-footer">{{ user_review.date }}</footer>
+                </blockquote>
+                {% else %}
+                <form class="px-2" method="POST"> 
                     <span class="text-center d-flex justify-content-center">Rate it!</span>
                     <div class="form-group row d-flex justify-content-center">  
                         <div class="rate" id="rate">
                             <input type="radio" id="star5" name="rate" value="5" />
-                            <label for="star5" title="text">5 stars</label>
+                            <label for="star5" title="Excellent">5 stars</label>
                             <input type="radio" id="star4" name="rate" value="4" />
-                            <label for="star4" title="text">4 stars</label>
+                            <label for="star4" title="Very Good">4 stars</label>
                             <input type="radio" id="star3" name="rate" value="3" />
-                            <label for="star3" title="text">3 stars</label>
+                            <label for="star3" title="Good">3 stars</label>
                             <input type="radio" id="star2" name="rate" value="2" />
-                            <label for="star2" title="text">2 stars</label>
-                            <input type="radio" id="star1" name="rate" value="1" />
-                            <label for="star1" title="text">1 star</label>
+                            <label for="star2" title="Meh">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" required/>
+                            <label for="star1" title="Bad">1 star</label>
                         </div>
                     </div>
                     <div class="form-group row">
                             <label for="textarea">Comment</label>                         
-                            <textarea class="form-control" id="textarea" placeholder="What do you think about this book?" name="username"></textarea>
+                            <textarea class="form-control" id="textarea" placeholder="What do you think about this book?" name="comment" required></textarea>
                         </div>
                     <div class="form-group row">
                         <button type="submit" class="btn btn-block btn-warning">Submit</button>
                     </div>
                 </form>
+                {% endif %}
             </dvi>
         </div>
         <h4 class="text-center mt-4">Goodreads Review Data</h4>
         <div class="card shadow rounded">
-            <div class="card-body">
-                <dl class="row text-primary">
-                    <dt class="col-sm-8">Average Rating</dt>
-                    <dd class="col-sm-4">4.50</dd>
-                    <dt class="col-sm-8">No. of Ratings</dt>
-                    <dd class="col-sm-4">23</dd>
-                </dl>                
+            <div class="card-body book_detail_list">
+                <li class="text-monospace text-primary">Average Rating: <span class="text-dark">{{ data['books'][0]['average_rating'] }}</span></li>
+                <li class="text-monospace text-primary">No. of Ratings: <span class="text-dark">{{ data['books'][0]['work_ratings_count'] }}</span></li>                                
             </div>
         </div>
     </div>   
