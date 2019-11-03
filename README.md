@@ -1,6 +1,6 @@
-# Project 1
+# CS50W Project 1
 
-Web Programming with Python and JavaScript
+## Web Programming with Python and JavaScript
 
 I build a book review website called 'BooksProject' with the following functionalities/features;
 
