@@ -160,7 +160,7 @@ def search():
         #searchword = request.form.get('searchword')
         searchword = request.args.get('searchword')
 
-        if searchword == "":
+        if searchword == " ":
             flash("No result found, please try again!", 'danger')
             return redirect(url_for('index'))
         else:
